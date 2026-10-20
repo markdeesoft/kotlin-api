@@ -23,13 +23,30 @@ import org.flywaydb.core.Flyway
 import java.time.Duration
 import java.time.LocalDateTime
 import kotlin.time.Duration.Companion.milliseconds
+import io.github.cdimascio.dotenv.dotenv
+import org.deesoft.plugins.configureMonitoring
 
 fun main() {
-    embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)
+
+    val dotenv = dotenv {
+        ignoreIfMissing = true
+    }
+
+    val port = dotenv["PORT"]?.toIntOrNull()
+        ?: System.getenv("PORT")?.toIntOrNull()
+        ?: 8080
+
+    val host = dotenv["HOST"]
+        ?: System.getenv("HOST")
+        ?: "0.0.0.0"
+
+    embeddedServer(Netty, port = port, host = host, module = Application::module)
         .start(wait = true)
 }
 
 fun Application.module() {
+
+    configureMonitoring()
 
     // StatusPages เพื่อให้ดักจับ Error ได้ทุกส่วน
     configureStatusPages()

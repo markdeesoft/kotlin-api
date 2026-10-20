@@ -1,0 +1,67 @@
+<configuration>
+
+    <!-- กำหนดค่าเริ่มต้น (Default) หากไม่ได้ส่ง Environment Variable เข้ามา ให้มองว่าเป็น development -->
+    <property name="LOG_LEVEL" value="${LOG_LEVEL:-INFO}" />
+    <property name="ENVIRONMENT" value="${APP_ENV:-development}" />
+    <property name="APP_NAME" value="${APP_NAME:-deesoft-kotlin-api}" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <!-- ปรับแต่งฟิลด์ JSON ตามต้องการ เช่น ซ่อนบางฟิลด์ที่ไม่จำเป็น -->
+            <fieldNames>
+                <timestamp>timestamp</timestamp>
+                <version>[ignore]</version>
+                <level>level</level>
+                <thread>[ignore]</thread>
+                <logger>logger</logger>
+                <message>message</message>
+                <stackTrace>exception</stackTrace>
+            </fieldNames>
+
+            <customFields>{"app": "${APP_NAME}", "${ENVIRONMENT}"}</customFields>
+        </encoder>
+    </appender>
+
+    <!-- Appender สำหรับบันทึกลงไฟล์ พร้อมตั้งค่าขนาดและระยะเวลา -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- ไฟล์ Log หลักที่จะเขียนปัจจุบัน -->
+        <file>logs/app.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- รูปแบบชื่อไฟล์สำรอง (เก็บแยกตามวันที่ %d และลำดับไฟล์ %i พร้อมบีบอัดเป็น .gz อัตโนมัติ) -->
+            <fileNamePattern>logs/archived/app-%d{yyyy-MM-dd}-%i.log.gz</fileNamePattern>
+
+            <!-- กำหนดขนาดไฟล์สูงสุดต่อ 1 ไฟล์ (เช่น 5MB ถึงจะทำการตัดรอบ) -->
+            <maxFileSize>1MB</maxFileSize>
+
+            <!-- กำหนดระยะเวลาเก็บรักษา: เก็บย้อนหลังไว้สูงสุด 30 วัน -->S
+            <maxHistory>30</maxHistory>
+
+            <!-- กำหนดพื้นที่จัดเก็บรวมทั้งหมดไม่ให้เกิน 50MB,1GB (ถ้าเกินจะทยอยลบไฟล์ที่เก่าที่สุดทิ้ง) -->
+            <totalSizeCap>5MB</totalSizeCap>
+        </rollingPolicy>
+
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <!-- ปรับแต่งฟิลด์ JSON ตามต้องการ เช่น ซ่อนบางฟิลด์ที่ไม่จำเป็น -->
+            <fieldNames>
+                <timestamp>timestamp</timestamp>
+                <version>[ignore]</version>
+                <level>level</level>
+                <thread>[ignore]</thread>
+                <logger>logger</logger>
+                <message>message</message>
+                <stackTrace>exception</stackTrace>
+            </fieldNames>
+
+            <customFields>{"app": "${APP_NAME}", "${ENVIRONMENT}"}</customFields>
+        </encoder>
+    </appender>
+
+    <!-- กำหนดระดับการแสดงผลของแพ็กเกจต่างๆ -->
+    <root level="${LOG_LEVEL}">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </root>
+
+    <logger name="org.deesoft" level="DEBUG" />
+</configuration>

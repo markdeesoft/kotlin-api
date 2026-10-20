@@ -1,4 +1,4 @@
-package org.deesoft.plugins // เปลี่ยนแพ็กเกจให้ตรงกับโปรเจกต์ของคุณ
+package org.deesoft.plugins
 
 import io.ktor.http.*
 import io.ktor.server.application.*

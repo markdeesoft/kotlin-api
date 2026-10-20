@@ -72,6 +72,14 @@ dependencies {
     // MockK สำหรับทำ Mock ใน Kotlin
     testImplementation("io.mockk:mockk:1.13.11")
 
+    // Ktor Server CallLogging (สำหรับบันทึก HTTP Request/Response อัตโนมัติ)
+    implementation("io.ktor:ktor-server-call-logging-jvm")
+    // Logback และ Logstash Encoder สำหรับทำ JSON Logging
+    implementation("ch.qos.logback:logback-classic:1.5.6")
+    implementation("net.logstash.logback:logstash-logback-encoder:7.4")
+
+    implementation("io.github.cdimascio:dotenv-kotlin:6.4.1")
+
 }
 
 tasks.test {
