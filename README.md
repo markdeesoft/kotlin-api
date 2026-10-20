@@ -46,18 +46,28 @@ src/
 └── test/                # Unit & Integration test suites
 ```
 
-### คำอธิบายแต่ละโฟลเดอร์ (สำหรับอ้างอิง)
+[//]: # (### Description of each folder &#40;for reference&#41;)
 
-  * **`database/`**: Manages database initialization, connection setup, and Exposed ORM table definitions.
-  * **`di/`**: Contains Dependency Injection (Koin) modules for wiring up services and repositories.
-  * **`model/`**: Stores data classes, DTOs, and domain entities used across the application.
-  * **`plugins/`**: Configures Ktor plugins such as StatusPages (centralized error handling), serialization, and routing.
-  * **`repository/`**: Implements the data access layer to interact directly with the database.
-  * **`routes/`**: Defines API endpoints and handles incoming HTTP requests.
-  * **`service/`**: Contains the core business logic and application use cases.
-  * **`utils/`**: Houses helper functions, extension functions, and utility classes.
-  * **`Main.kt`: The main entry point of the application where the Ktor Netty server is started.
-  * **`resources/`**: Stores configuration files and resources such as logback.xml.
+[//]: # ()
+[//]: # (  * **`database/`**: Manages database initialization, connection setup, and Exposed ORM table definitions.)
+
+[//]: # (  * **`di/`**: Contains Dependency Injection &#40;Koin&#41; modules for wiring up services and repositories.)
+
+[//]: # (  * **`model/`**: Stores data classes, DTOs, and domain entities used across the application.)
+
+[//]: # (  * **`plugins/`**: Configures Ktor plugins such as StatusPages &#40;centralized error handling&#41;, serialization, and routing.)
+
+[//]: # (  * **`repository/`**: Implements the data access layer to interact directly with the database.)
+
+[//]: # (  * **`routes/`**: Defines API endpoints and handles incoming HTTP requests.)
+
+[//]: # (  * **`service/`**: Contains the core business logic and application use cases.)
+
+[//]: # (  * **`utils/`**: Houses helper functions, extension functions, and utility classes.)
+
+[//]: # (  * **`Main.kt`: The main entry point of the application where the Ktor Netty server is started.)
+
+[//]: # (  * **`resources/`**: Stores configuration files and resources such as logback.xml.)
 
 ---
 
@@ -101,6 +111,22 @@ LOG_LEVEL=INFO
    ```bash
    ./gradlew test
    ```
+
+---
+
+## 📌 API Endpoints
+
+Below is the summary of available RESTful API endpoints for managing tasks:
+
+| HTTP Method | Endpoint | Description | Sample Request Payload | Status Code |
+| :--- | :--- | :--- | :--- | :--- |
+| **GET** | `/tasks` | Retrieve all tasks | *None* | `200 OK` |
+| **GET** | `/tasks/{id}` | Retrieve a specific task by ID | *None* | `200 OK` / `404 Not Found` |
+| **POST** | `/tasks` | Create a new task | See example below | `201 Created` / `400 Bad Request` |
+| **PUT** | `/tasks/{id}` | Update an existing task | See example below | `200 OK` / `404 Not Found` |
+| **PATCH** | `/tasks/{id}/complete` | Mark a specific task as completed | *None (Path Parameter only)* | `200 OK` / `404 Not Found` |
+| **DELETE** | `/tasks/{id}` | Delete a task by ID | *None* | `204 No Content` / `404 Not Found` |
+
 
 ---
 
