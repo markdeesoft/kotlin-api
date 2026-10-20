@@ -1,7 +1,6 @@
 package org.deesoft.repository
 
 import org.deesoft.database.TaskTable
-import org.deesoft.model.Task
 import org.deesoft.model.TaskResponse
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.*

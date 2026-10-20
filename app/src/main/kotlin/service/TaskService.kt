@@ -1,6 +1,5 @@
 package org.deesoft.service
 
-import org.deesoft.model.Task
 import org.deesoft.model.TaskResponse
 import org.deesoft.plugins.DataNotFoundException
 import org.deesoft.repository.TaskRepository

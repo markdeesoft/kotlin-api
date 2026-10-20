@@ -22,7 +22,6 @@ import org.deesoft.repository.TaskRepository
 import org.flywaydb.core.Flyway
 import java.time.Duration
 import java.time.LocalDateTime
-import java.util.concurrent.TimeUnit
 import kotlin.time.Duration.Companion.milliseconds
 
 fun main() {

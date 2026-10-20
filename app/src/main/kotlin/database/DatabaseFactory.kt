@@ -3,7 +3,7 @@ package org.deesoft.database
 import org.jetbrains.exposed.sql.Database
 import java.io.File
 
-object `DatabaseFactory` {
+object DatabaseFactory {
     fun init() {
         // สร้างไฟล์ database ไว้ในโฟลเดอร์โปรเจกต์ (เช่น tasks.db)
         val dbFile = File("data/tasks.db")
